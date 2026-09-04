@@ -1,0 +1,58 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+  <style>
+    body { margin: 0; background: #0A0B0D; font-family: "IBM Plex Mono", ui-monospace, Menlo, monospace; }
+    a { color: #35D08A; } a:hover { color: #D7DBE0; }
+  </style>
+</helmet>
+
+<div style="background:#0A0B0D; color:#D7DBE0; width:1600px; box-sizing:border-box; font-size:13px; font-variant-numeric:tabular-nums">
+
+  <div style="display:flex; align-items:center; height:34px; border-bottom:1px solid #1E2126; background:#101215">
+    <div style="padding:0 14px; font-weight:600; letter-spacing:.04em">DZ-EDGE</div>
+    <div style="width:1px; height:34px; background:#1E2126"></div>
+    <div style="padding:0 14px; color:#FF5C5C">FEED DOWN</div>
+    <div style="width:1px; height:34px; background:#1E2126"></div>
+    <div style="padding:0 14px; color:#7C838C">tunnel <span style="color:#4E545C">down</span><span style="color:#4E545C"> · </span>bgp <span style="color:#4E545C">idle</span><span style="color:#4E545C"> · </span>group <span style="color:#4E545C">not joined</span></div>
+    <div style="width:1px; height:34px; background:#1E2126"></div>
+    <div style="padding:0 14px; color:#7C838C">mode <span style="color:#4E545C">IDLE</span></div>
+    <div style="flex-grow:1"></div>
+    <div style="padding:0 14px; color:#7C838C">waiting</div>
+  </div>
+
+  <div style="display:grid; grid-template-columns:300px minmax(0,1fr); gap:1px; background:#1E2126">
+    <div style="background:#0A0B0D">
+      <div style="height:24px; display:flex; align-items:center; padding:0 12px; background:#101215; border-bottom:1px solid #1E2126; font-size:10px; letter-spacing:.14em; color:#7C838C">FEED</div>
+      <div style="padding:12px; display:flex; flex-direction:column; gap:7px; color:#4E545C">
+        <div style="display:flex; justify-content:space-between"><span>packets/s</span><span>0</span></div>
+        <div style="display:flex; justify-content:space-between"><span>shreds/s</span><span>0</span></div>
+        <div style="display:flex; justify-content:space-between"><span>fec sets/s</span><span>0</span></div>
+        <div style="display:flex; justify-content:space-between"><span>entries/s</span><span>0</span></div>
+        <div style="display:flex; justify-content:space-between"><span>tx/s</span><span>0</span></div>
+      </div>
+    </div>
+    <div style="background:#0A0B0D">
+      <div style="height:24px; display:flex; align-items:center; padding:0 12px; background:#101215; border-bottom:1px solid #1E2126; font-size:10px; letter-spacing:.14em; color:#7C838C">EVENT LOG</div>
+      <div style="padding:10px 12px; font-size:12px; line-height:1.85; color:#7C838C">
+        <div><span style="color:#4E545C">12:03:58.004</span> <span style="color:#FF5C5C">WARN</span> no packets on 233.84.178.1:7733 for 30s</div>
+        <div><span style="color:#4E545C">12:03:58.004</span> <span style="color:#7C838C">HINT</span> run: doublezero connect multicast --subscribe-feed solana-shreds-full-fra</div>
+        <div><span style="color:#4E545C">12:04:02.117</span> <span style="color:#7C838C">RPC </span> public lane connected, 1,204 tx/s</div>
+        <div><span style="color:#4E545C">12:04:02.118</span> <span style="color:#E5A23D">IDLE</span> arbitrage disabled: no reference lane</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</x-dc>
+</body>
+</html>

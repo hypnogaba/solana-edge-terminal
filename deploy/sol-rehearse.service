@@ -1,0 +1,25 @@
+# The stream terminal driven by invented data, for rehearsing before the shred
+# feed exists. It binds the loopback only and is not in the tunnel's ingress,
+# so nothing reaches it from outside this host until someone decides otherwise.
+#
+# The page it serves carries a banner saying every number on it is made up.
+[Unit]
+Description=DZ Edge terminal rehearsal (invented data)
+After=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=/root/solana-edge-lab
+ExecStart=/root/solana-edge-lab/target/release/solana-edge-lab rehearse \
+  --http 127.0.0.1:8091 \
+  --seed 1
+Restart=on-failure
+RestartSec=3
+# It reads nothing and sends nothing: no capture, no RPC, no wallet, so it
+# needs no capabilities at all. ProtectHome is deliberately absent: the binary
+# lives under /root, and hiding /root hides the thing being started.
+NoNewPrivileges=true
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target

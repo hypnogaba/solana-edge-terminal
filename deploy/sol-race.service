@@ -1,0 +1,49 @@
+# ────────────────────────────────────────────────────────────────────────
+# solana-edge-lab — the race, plus its dashboard.
+#
+# Reads the DoubleZero shred feed off the tunnel with AF_PACKET (hence
+# CAP_NET_RAW) and races it against ordinary RPC WebSockets, on one clock.
+# Serves the dashboard on 127.0.0.1:8090.
+#
+# Lane URLs come from /root/solana-edge-lab/.env as env: references, never on
+# the command line: a URL in argv carries the API key into ps and into
+# systemctl status, where every user on the box can read it.
+#
+# Install:
+#   sudo cp deploy/sol-race.service /etc/systemd/system/
+#   sudo systemctl daemon-reload && sudo systemctl enable --now sol-race
+#
+# The reference lane is the shred feed. Until it is provisioned this runs with
+# one RPC lane: triggers and gaps accumulate, and the page says on its face that
+# the fast side is missing rather than quietly comparing two RPC lanes.
+#
+# A second RPC lane needs its own key. Sharing one with another service gets
+# 429 on every reconnect, which looks like a dead lane. For the same reason
+# RPC_WS_POOLS should NOT be the same endpoint as a lane: the pool
+# subscriptions and the lane would compete on one connection budget.
+# ────────────────────────────────────────────────────────────────────────
+
+[Unit]
+Description=solana-edge-lab: DoubleZero shreds vs the ordinary RPC path
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/root/solana-edge-lab
+EnvironmentFile=/root/solana-edge-lab/.env
+ExecStart=/root/solana-edge-lab/target/release/solana-edge-lab race \
+    --iface doublezero1 --group 233.84.178.1 --port 7733 \
+  --beside 127.0.0.1:8080 \
+  --reference doublezero \
+    --lane public=env:RPC_WS_PUBLIC \
+    --watch-pools --pool-ws env:RPC_WS_POOLS \
+    --out data/solana_race.json \
+    --http 127.0.0.1:8090
+AmbientCapabilities=CAP_NET_RAW
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

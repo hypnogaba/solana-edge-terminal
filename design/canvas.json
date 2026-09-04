@@ -1,0 +1,10 @@
+{
+  "artboards": [
+    { "file": "Main.dc.html", "x": 0, "y": 0, "w": 1600, "h": 1000, "title": "Terminal" },
+    { "file": "FeedDown.dc.html", "x": 0, "y": 1160, "w": 1600, "h": 300, "title": "Feed down, before the command" }
+  ],
+  "annotations": [
+    { "id": "sample-note", "x": 1720, "y": 0, "w": 560, "text": "Numbers are samples. The real page reads them from the running bot.\n\nHead start and TAKEN BY are the numbers the stream is about, not the SOL amounts." }
+  ],
+  "launch": { "view": "focused", "file": "Main.dc.html" }
+}
